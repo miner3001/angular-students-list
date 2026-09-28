@@ -1,0 +1,5 @@
+<h2>Students List:</h2>
+<!-- <app-student *ngFor="let student of students" [item]="student"></app-student> -->
+@for (student of students; track $index) {
+    <app-student [item]="student" [index]="$index + 1"></app-student>
+}

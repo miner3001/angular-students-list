@@ -1,0 +1,9 @@
+<div [ngStyle]="getStyle(item)">
+    <span>{{index}}) </span>
+    {{item.name}} di {{item.city}} è
+    @if (item.present) {
+    <span>presente</span>
+    } @else {
+    <span style="text-transform: uppercase;">assente</span>
+    }
+</div>
