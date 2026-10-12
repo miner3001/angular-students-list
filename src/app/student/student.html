@@ -1,9 +1,25 @@
-<div [ngStyle]="getStyle(item)">
-    <span>{{index}}) </span>
-    {{item.name}} di {{item.city}} è
-    @if (item.present) {
-    <span>presente</span>
-    } @else {
-    <span style="text-transform: uppercase;">assente</span>
-    }
+<div class="list-group-item d-flex justify-content-between align-items-center p-3 mb-2 bg-white rounded border shadow-sm"
+    [ngStyle]="getStyle(item)">
+    <div class="d-flex align-items-center gap-2">
+        <!-- Indice dello studente -->
+        <span class="badge bg-secondary rounded-pill fs-6 fw-normal">{{index}}</span>
+
+        <!-- Nome e Città -->
+        <span class="fs-5 text-dark">
+            <strong class="text-primary">{{item.name}}</strong> di <span class="text-muted">{{item.city}}</span>
+        </span>
+    </div>
+
+    <!-- Stato (Presente / Assente) -->
+    <div class="presence" (click)="onPresentClick()">
+        @if (item.present) {
+        <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 text-uppercase fs-6">
+            Presente
+        </span>
+        } @else {
+        <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2 text-uppercase fs-6">
+            Assente
+        </span>
+        }
+    </div>
 </div>

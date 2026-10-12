@@ -1,5 +1,65 @@
-<h2>Students List:</h2>
-<!-- <app-student *ngFor="let student of students" [item]="student"></app-student> -->
-@for (student of students; track $index) {
-    <app-student [item]="student" [index]="$index + 1"></app-student>
-}
+<!-- Aggiunta nuovo studente -->
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Aggiungi Nuovo Studente</h5>
+    </div>
+    <div class="card-body">
+        <div class="row g-3 align-items-end">
+            <!-- Campo Nome -->
+            <div class="col-md-4">
+                <label for="txtName" class="form-label fw-semibold">Nome studente:</label>
+                <input type="text" id="txtName" class="form-control" [(ngModel)]="studentName"
+                    placeholder="Inserisci il nome">
+            </div>
+
+            <!-- Campo Genere (Radio) -->
+            <div class="col-md-3">
+                <label class="form-label d-block fw-semibold">Genere:</label>
+                <div class="d-flex gap-3 pt-1">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="rdbF" value="F"
+                            [(ngModel)]="studentGender">
+                        <label class="form-check-label" for="rdbF">Femmina</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="rdbM" value="M"
+                            [(ngModel)]="studentGender">
+                        <label class="form-check-label" for="rdbM">Maschio</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campo Città (Select) -->
+            <div class="col-md-3">
+                <label for="lstTown" class="form-label fw-semibold">Città:</label>
+                <select name="lstTown" id="lstTown" class="form-select" [(ngModel)]="studentTown">
+                    <option value="" disabled selected>Seleziona città...</option>
+                    <!-- scorro l'array di città e creo le option -->
+                    @for (item of towns; track $index) {
+                    <option value="{{item}}">{{item}}</option>
+                    }
+                </select>
+            </div>
+
+            <!-- Pulsante Aggiungi -->
+            <div class="col-md-2 d-grid">
+                <button class="btn btn-success" (click)="onAddStudent()">
+                    <i class="bi bi-plus-lg"></i> AGGIUNGI
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Visualizzazione lista studenti -->
+<h3 class="border-bottom pb-2 mb-3 ms-2 text-secondary">Students List:</h3>
+
+<div class="row g-2">
+    <!-- <app-student *ngFor="let student of students" [item]="student"></app-student> -->
+    @for (student of students; track $index) {
+    <div class="col-12" style="position: relative;">
+        <app-student [item]="student" [index]="$index + 1"></app-student>
+        <button type="button" class="btn-close" aria-label="Close" (click)="onRemoveStudent($index)"></button>
+    </div>
+    }
+</div>

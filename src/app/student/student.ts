@@ -14,11 +14,15 @@ export class Student {
   M_COLOR = "lightblue";
   F_COLOR = "pink";
 
-  getStyle(s: any){
+  getStyle(s: any) {
     return {
       'backgroundColor': s.gender == 'F' ? this.F_COLOR : this.M_COLOR,
-      'textDecoration':s.present ? 'none' : 'underline',
+      'textDecoration': s.present ? 'none' : 'underline',
       'font-weight': s.present ? 'normal' : 'bold'
     }
+  }
+
+  onPresentClick() {
+    this.item.present = !this.item.present;
   }
 }
