@@ -10,38 +10,48 @@ import { FormsModule } from '@angular/forms';
 })
 export class StudentsList {
   students: any[] = [
-    { name: "Pippo", city: "Topolinia", gender: "M", present: true },
-    { name: "Pluto", city: "Topolinia", gender: "M", present: false },
-    { name: "Paperina", city: "Paperopoli", gender: "F", present: true },
-    { name: "Gastone", city: "Paperopoli", gender: "M", present: true },
-    { name: "Minnie", city: "Topolinia", gender: "F", present: false }
+    { name: 'Pippo', city: 'Topolinia', gender: 'M', present: true },
+    { name: 'Pluto', city: 'Topolinia', gender: 'M', present: false },
+    { name: 'Paperina', city: 'Paperopoli', gender: 'F', present: true },
+    { name: 'Gastone', city: 'Paperopoli', gender: 'M', present: true },
+    { name: 'Minnie', city: 'Topolinia', gender: 'F', present: false },
   ];
 
-  towns: string[] = [
-    "Topolinia", "Paperopoli", "Bra", "Alba", "Cuneo", "Fossano", "Saluzzo"
-  ]
+  towns: string[] = ['Topolinia', 'Paperopoli', 'Bra', 'Alba', 'Cuneo', 'Fossano', 'Saluzzo'];
 
-  studentName: string = "";
-  studentGender: string = this.generaNumero(1, 3) == 1 ? "F" : "M";
-  studentTown: string = this.towns[this.generaNumero(0, this.towns.length)];
+  studentName = '';
+  studentGender = 'M';
+  studentTown = this.towns[0];
 
   onAddStudent() {
-    if (this.studentName.length == 0) {
-      alert("Il nome è obbligatorio!");
+    const trimmedName = this.studentName.trim();
+
+    if (!trimmedName) {
+      alert('Il nome è obbligatorio!');
       return;
     }
 
-    let newStudent = {
-      name: this.studentName,
+    const newStudent = {
+      name: trimmedName,
       city: this.studentTown,
       gender: this.studentGender,
-      present: true
-    }
+      present: true,
+    };
+
     this.students.push(newStudent);
+    this.studentName = '';
+    this.studentGender = 'M';
+    this.studentTown = this.towns[0];
   }
 
-  onRemoveStudent(index: number) {
+  onRemoveClick(index: number) {
     this.students.splice(index, 1);
+  }
+
+  onPresentClick(index: number) {
+    if (this.students[index]) {
+      this.students[index].present = !this.students[index].present;
+    }
   }
 
   // Genera tra min e max con max escluso

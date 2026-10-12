@@ -5,3 +5,10 @@
 .presence>span {
     min-width: 150px;
 }
+.btn-close {
+    position: absolute;
+    top: 22px;
+    right: 200px;
+    z-index: 999;
+    background-color: lightcoral;
+}

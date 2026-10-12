@@ -59,7 +59,7 @@
     @for (student of students; track $index) {
     <div class="col-12" style="position: relative;">
         <app-student [item]="student" [index]="$index + 1"></app-student>
-        <button type="button" class="btn-close" aria-label="Close" (click)="onRemoveStudent($index)"></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="onRemoveClick($index)"></button>
     </div>
     }
 </div>

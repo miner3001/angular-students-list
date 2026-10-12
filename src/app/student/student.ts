@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,20 +9,24 @@ import { CommonModule } from '@angular/common';
 })
 export class Student {
   @Input() item: any;
-  @Input() index: number = 0;
-
-  M_COLOR = "lightblue";
-  F_COLOR = "pink";
+  @Input() index = 0;
+  @Output() removeStudentEvent = new EventEmitter<any>();
+  M_COLOR = 'lightblue';
+  F_COLOR = 'pink';
 
   getStyle(s: any) {
     return {
-      'backgroundColor': s.gender == 'F' ? this.F_COLOR : this.M_COLOR,
-      'textDecoration': s.present ? 'none' : 'underline',
-      'font-weight': s.present ? 'normal' : 'bold'
-    }
+      backgroundColor: s.gender === 'F' ? this.F_COLOR : this.M_COLOR,
+      textDecoration: s.present ? 'none' : 'underline',
+      'font-weight': s.present ? 'normal' : 'bold',
+    };
   }
 
   onPresentClick() {
-    this.item.present = !this.item.present;
+    if (this.item) {
+      this.item.present = !this.item.present;
+    }
+
+    this.removeStudentEvent.emit(this.item);
   }
 }
